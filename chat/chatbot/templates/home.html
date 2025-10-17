@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Home</title>
+</head>
+<body>
+    <h2>Welcome to SHER's CHAT</h2>
+    <a href="{% url 'chat' %}">Go to Chat Threads</a> |
+    <a href="{% url 'documents' %}">My Documents</a> |
+    <a href="{% url 'logout' %}">Logout</a>
+    <hr>
+
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    <form method="post" style="display:inline-block; margin-right:10px;">
+        {% csrf_token %}
+        <input type="text" name="user_input" placeholder="Ask me anything..." required>
+        <button type="submit">Send</button>
+    </form>
+    <form method="post" style="display:inline-block;">
+        {% csrf_token %}
+        <input type="hidden" name="clear_chat" value="1">
+        <button type="submit">Clear Chat</button>
+    </form>
+
+    <hr>
+    <h3>Chat History</h3>
+    <div>
+        {% for chat in chat_history %}
+            <div><b>You:</b> {{ chat.user }}</div>
+            <div><b>Bot:</b> {{ chat.bot }}</div>
+            <hr>
+        {% empty %}
+            <div>No messages yet.</div>
+        {% endfor %}
+    </div>
+</body>
+</html>

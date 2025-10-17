@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f8fafc;
+}
+h2 {
+    color: #334155;
+}
+input, button {
+    font-size: 1em;
+}
+.message.user {
+    background: #e0e7ff;
+}
+.message.bot {
+    background: #f1f5f9;
+}
